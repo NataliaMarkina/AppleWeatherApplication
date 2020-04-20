@@ -41,5 +41,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Хотите использовать Ваше текущее местоположение?</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Хотите использовать Ваше текущее местоположение?</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Хотите использовать Ваше текущее местоположение?</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Хотите использовать Ваше текущее местоположение?</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
