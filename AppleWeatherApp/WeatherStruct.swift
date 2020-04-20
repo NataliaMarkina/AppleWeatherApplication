@@ -8,10 +8,30 @@
 
 import Foundation
 
-struct AllWeatherModel: Codable{
+struct AllWeatherModel: Codable {
     var name: String
     var main: MainModel
     var weather: [WeatherModel]
+    
+    func viewModel() -> WeatherViewModel {
+        let nameVal = name
+        let tempVal = main.temp
+        let feelsLikeVal = main.feelsLike
+        let iconVal = weather[0].icon
+        
+        let tempCelsiusVal = Int(round(tempVal - 273.15))
+        let feelsLikeCelsiusVal = Int(round(feelsLikeVal - 273.15))
+        
+        let obj = WeatherViewModel(name: nameVal, tempCelsius: String(tempCelsiusVal), feelsLikeCelsius: String(feelsLikeCelsiusVal), icon: iconVal)
+        return obj
+    }
+}
+
+struct WeatherViewModel: Codable {
+    var name: String
+    var tempCelsius: String
+    var feelsLikeCelsius: String
+    var icon: String
 }
 
 struct MainModel: Codable {

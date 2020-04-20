@@ -38,12 +38,12 @@ class ViewController: UIViewController {
     }
     
     func getInformation(lat: Double, lon: Double) {
-        ApiManager.shared.getWeather(lat: lat, lon: lon, closure: {(weatherModel: AllWeatherModel) -> Void in
+        ApiManager.shared.getWeather(lat: lat, lon: lon, closure: {(weatherModel: WeatherViewModel) -> Void in
             DispatchQueue.main.async{
                 self.nameLabel.text = weatherModel.name
-                self.tempLabel.text = String(Int(round(weatherModel.main.temp - 273.15)))
-                self.feelsLikeLabel.text = String(Int(round(weatherModel.main.feelsLike - 273.15)))
-                ApiManager.shared.getIcon(id: weatherModel.weather[0].icon, closure: {(image: UIImage) -> Void in
+                self.tempLabel.text = weatherModel.tempCelsius
+                self.feelsLikeLabel.text = weatherModel.feelsLikeCelsius
+                ApiManager.shared.getIcon(id: weatherModel.icon, closure: {(image: UIImage) -> Void in
                     DispatchQueue.main.async{
                         self.imageView.image = image
                     }

@@ -16,7 +16,7 @@ class ApiManager {
     let appID = "e7b9dd9f41c3ac26eae9e94536c8075e"
     let urlImage = "http://openweathermap.org/img/wn/"
     
-    func getWeather(lat: Double, lon: Double, closure: @escaping (AllWeatherModel) -> Void) {
+    func getWeather(lat: Double, lon: Double, closure: @escaping (WeatherViewModel) -> Void) {
         let session = URLSession.shared
         let url = URL(string: "\(urlApi)?lat=\(lat)&lon=\(lon)&appid=\(appID)")!
         let task = session.dataTask(with: url) { data, response, error in
@@ -38,7 +38,7 @@ class ApiManager {
             do {
                 guard let dataValue = data else {return}
                 let weatherObj = try JSONDecoder().decode(AllWeatherModel.self, from: dataValue)
-                closure(weatherObj)
+                closure(weatherObj.viewModel())
             } catch {
                 print(error.localizedDescription)
             }
