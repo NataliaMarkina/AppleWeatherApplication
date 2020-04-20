@@ -38,7 +38,7 @@ class ApiManager {
             do {
                 guard let dataValue = data else {return}
                 let weatherObj = try JSONDecoder().decode(AllWeatherModel.self, from: dataValue)
-                closure(weatherObj.viewModel())
+                closure(weatherObj.viewModel)
             } catch {
                 print(error.localizedDescription)
             }

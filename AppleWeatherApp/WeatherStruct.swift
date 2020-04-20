@@ -13,7 +13,7 @@ struct AllWeatherModel: Codable {
     var main: MainModel
     var weather: [WeatherModel]
     
-    func viewModel() -> WeatherViewModel {
+    var viewModel: WeatherViewModel {
         let nameVal = name
         let tempVal = main.temp
         let feelsLikeVal = main.feelsLike
@@ -22,8 +22,7 @@ struct AllWeatherModel: Codable {
         let tempCelsiusVal = Int(round(tempVal - 273.15))
         let feelsLikeCelsiusVal = Int(round(feelsLikeVal - 273.15))
         
-        let obj = WeatherViewModel(name: nameVal, tempCelsius: String(tempCelsiusVal), feelsLikeCelsius: String(feelsLikeCelsiusVal), icon: iconVal)
-        return obj
+        return WeatherViewModel(name: nameVal, tempCelsius: String(tempCelsiusVal), feelsLikeCelsius: String(feelsLikeCelsiusVal), icon: iconVal)
     }
 }
 
