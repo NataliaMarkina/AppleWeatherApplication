@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -33,7 +34,20 @@ class ViewController: UIViewController {
     
     @IBAction func updateWeather(_ sender: UIButton) {
         if let last = currentManager?.getLastLocation() {
-            locationUpdated(lat: last.0, lon: last.1)
+            let results = CoreDataManager.instance.getRequest()
+            if results.count == 0 {
+                locationUpdated(lat: last.0, lon: last.1)
+            } else {
+                let alert = UIAlertController(title: "Хотите обновить данные?", message: "Хотите обновить данные?", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
+                    self.locationUpdated(lat: last.0, lon: last.1)
+                }))
+                alert.addAction(UIAlertAction(title: "Нет", style: .default, handler: {_ in
+                    self.setOldData(results: results)
+                }))
+                present(alert, animated: true, completion: nil)
+            }
+            //locationUpdated(lat: last.0, lon: last.1)
         }
     }
     
@@ -50,6 +64,19 @@ class ViewController: UIViewController {
                 })
             }
         })
+    }
+    
+    func setOldData(results: [Weather]) {
+        DispatchQueue.main.async{
+            self.nameLabel.text = results[0].name
+            self.tempLabel.text = results[0].temp
+            self.feelsLikeLabel.text = results[0].feelsLike
+            ApiManager.shared.getIcon(id: results[0].iconId!, closure: {(image: UIImage) -> Void in
+                DispatchQueue.main.async{
+                    self.imageView.image = image
+                }
+            })
+        }
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class ApiManager {
     static var shared = ApiManager()
@@ -35,10 +36,30 @@ class ApiManager {
                 return
             }
             
-            do {
+            do {                
                 guard let dataValue = data else {return}
                 let weatherObj = try JSONDecoder().decode(AllWeatherModel.self, from: dataValue)
                 closure(weatherObj.viewModel)
+                
+                let results = CoreDataManager.instance.getRequest()
+                for result in results {
+                    if results.count == 0 {
+                        let managedObject = Weather()
+                        managedObject.name = weatherObj.viewModel.name
+                        managedObject.temp = weatherObj.viewModel.tempCelsius
+                        managedObject.feelsLike = weatherObj.viewModel.feelsLikeCelsius
+                        managedObject.iconId = weatherObj.viewModel.icon
+                        
+                        CoreDataManager.instance.saveContext()
+                    } else {
+                        result.name = weatherObj.viewModel.name
+                        result.temp = weatherObj.viewModel.tempCelsius
+                        result.feelsLike = weatherObj.viewModel.feelsLikeCelsius
+                        result.iconId = weatherObj.viewModel.icon
+                        
+                        CoreDataManager.instance.saveContext()
+                    }
+                }
             } catch {
                 print(error.localizedDescription)
             }
