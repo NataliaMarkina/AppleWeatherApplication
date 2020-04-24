@@ -104,9 +104,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="celsiusLabel" destination="6rN-DB-wmE" id="Oh4-za-J9q"/>
                         <outlet property="feelsLikeLabel" destination="EAA-yD-F96" id="upd-fq-VNy"/>
                         <outlet property="imageView" destination="WWd-YR-cbB" id="wpy-H1-hgR"/>
                         <outlet property="nameLabel" destination="bMs-qg-XxR" id="EOR-Hv-1Bx"/>
+                        <outlet property="stack1" destination="XiE-Kc-fwJ" id="MI6-0B-kkG"/>
+                        <outlet property="stack2" destination="dKu-Rr-0wO" id="i0R-rj-9F7"/>
                         <outlet property="tempLabel" destination="BfN-xo-2E2" id="k3r-YH-AB5"/>
                     </connections>
                 </viewController>

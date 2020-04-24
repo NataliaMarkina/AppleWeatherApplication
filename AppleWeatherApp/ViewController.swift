@@ -12,17 +12,33 @@ import CoreData
 
 class ViewController: UIViewController {
     
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var feelsLikeLabel: UILabel!
+    
+    @IBOutlet weak var celsiusLabel: UILabel!
+    
+    @IBOutlet weak var stack1: UIStackView!
+    @IBOutlet weak var stack2: UIStackView!
     
     var currentManager: LocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.imageView.alpha = 0
+        UIView.animate(withDuration: 2, delay: 1, options: .curveEaseOut, animations: { () -> Void in
+            self.imageView.alpha = 1
+        }, completion: nil)
+        
+        
+        UIView.animate(withDuration: 1, delay: 1, options: .curveEaseOut, animations: { () -> Void in
+            self.nameLabel.frame.origin.x = 300
+            self.stack1.frame.origin.x = 400
+            self.stack2.frame.origin.x = 400
+        }, completion: nil)
         
         self.nameLabel.text = ""
         self.tempLabel.text = ""
